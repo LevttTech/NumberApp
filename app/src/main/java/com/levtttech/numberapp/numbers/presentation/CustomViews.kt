@@ -27,11 +27,11 @@ class BaseCustomTextInputLayout : TextInputLayout, CustomTextInputLayout {
     }
 }
 
-interface CustomTextEditInputLayout {
+interface CustomTextInputEditTextLayout {
     fun showText(text: String)
 }
 
-class BaseCustomTextEditInputLayout : TextInputEditText, CustomTextEditInputLayout {
+class BaseCustomTextEditInputLayout : TextInputEditText, CustomTextInputEditTextLayout {
     constructor(p0: Context) : super(p0)
     constructor(p0: Context, p1: AttributeSet?) : super(p0, p1)
     constructor(p0: Context, p1: AttributeSet?, p2: Int) : super(
