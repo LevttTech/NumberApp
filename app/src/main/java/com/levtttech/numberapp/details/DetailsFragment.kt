@@ -1,53 +1,41 @@
-package com.levtttech.numberapp.numbers.presentation
+package com.levtttech.numberapp.details
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.transition.Visibility
 import com.levtttech.numberapp.R
-import com.levtttech.numberapp.details.DetailsFragment
 
-class NumbersFragment : Fragment() {
 
+class DetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(
-            R.layout.fragment_numbers,
-            container,
-            false
-        )
+        return inflater.inflate(R.layout.fragment_details, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<ProgressBar>(R.id.progressBar).visibility = View.GONE
-
-        view.findViewById<View>(R.id.getFactButton).setOnClickListener {
-            val detailsFragment = DetailsFragment()
-            detailsFragment.arguments = Bundle().apply {
-                putString("details","hello")
-            }
-            requireActivity().supportFragmentManager.beginTransaction()
-                .add(R.id.container, detailsFragment)
-                .addToBackStack(NumbersFragment.javaClass.simpleName)
-                .commit()
-        }
+        val str = requireArguments().getString("details")
+        view.findViewById<TextView>(R.id.textViewDetails).text = str
     }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         log("onAttach")
     }
 
-
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        log("onSaveInstanceState")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,10 +47,6 @@ class NumbersFragment : Fragment() {
         log("onStart")
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        log("onSaveInstanceState")
-    }
 
     override fun onResume() {
         super.onResume()
@@ -99,6 +83,6 @@ class NumbersFragment : Fragment() {
     }
 
     companion object {
-        const val TAG = "NumberFragment"
+        const val TAG = "DetailFragment"
     }
 }
